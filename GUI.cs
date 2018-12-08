@@ -102,8 +102,11 @@ namespace LC2SQLiteGUI
 
                 if (tablecombobox.Items.Count > 0)
                 {
-                    tablecombobox.SelectedIndex = 0;
-                    cbExec.SelectedIndex = 0;
+                    //tablecombobox.SelectedIndex = 0;
+                    //cbExec.SelectedIndex = 0;
+                    tablecombobox.SelectedIndex = int.Parse(ConfigurationManager.AppSettings["selectedCol"]);
+                    cbExec.SelectedIndex = int.Parse(ConfigurationManager.AppSettings["selectedCol"]);
+
                     btnDelete.Enabled = true;
                 }
                 else
@@ -143,7 +146,7 @@ namespace LC2SQLiteGUI
                 SQLiteConnection sqlconn = new SQLiteConnection(connString);
                 sqlconn.Open();
 
-                string CommandText = String.Format("Select url from {0};", tablecombobox.Text);
+                string CommandText = String.Format("Select "+ConfigurationManager.AppSettings["col"]+" from {0};", tablecombobox.Text);
 
                 this.dataAdapter = new SQLiteDataAdapter(CommandText, sqlconn);
                 SQLiteCommandBuilder builder = new SQLiteCommandBuilder(this.dataAdapter);
@@ -716,6 +719,8 @@ namespace LC2SQLiteGUI
         #region Load
         private void GUI_Load(object sender, EventArgs e)
         {
+            this.Text = ConfigurationManager.AppSettings["title"];
+            cbExec.Text = ConfigurationManager.AppSettings["table"];
             DB_NAME = Environment.CurrentDirectory + "\\" + ConfigurationManager.AppSettings["database"];
             if (File.Exists(DB_NAME))
             {
@@ -728,6 +733,11 @@ namespace LC2SQLiteGUI
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
+            getPatternFromDatabase();
+        }
+
+        private void getPatternFromDatabase()
+        {
             try
             {
                 if (DB_NAME == null)
@@ -735,6 +745,8 @@ namespace LC2SQLiteGUI
                     MessageBox.Show("Open an existing database or Create a new database");
                     return;
                 }
+                String table = cbExec.Text; //ConfigurationManager.AppSettings["table"];
+                String column = ConfigurationManager.AppSettings["col"];
 
                 this.dataSet = new DataSet();
                 string connString = String.Format("Data Source={0};New=" + sNew + ";Version=" + iVersion + ";Compress=" + sCompress + ";", DB_NAME);
@@ -742,7 +754,7 @@ namespace LC2SQLiteGUI
                 SQLiteConnection sqlconn = new SQLiteConnection(connString);
                 sqlconn.Open();
 
-                string CommandText = String.Format("Select url from {0} where url like '%%" + tbQuery.Text + "%%';", tablecombobox.Text);
+                string CommandText = String.Format("Select " + column + " from {0} where " + column + " like '%%" + tbQuery.Text + "%%';", table);
 
                 this.dataAdapter = new SQLiteDataAdapter(CommandText, sqlconn);
                 SQLiteCommandBuilder builder = new SQLiteCommandBuilder(this.dataAdapter);
@@ -762,6 +774,14 @@ namespace LC2SQLiteGUI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void tbQuery_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                getPatternFromDatabase();
             }
         }
     }

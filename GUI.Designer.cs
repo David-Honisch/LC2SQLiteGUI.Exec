@@ -180,20 +180,20 @@ namespace LC2SQLiteGUI
             this.topicsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripHelp});
             this.topicsToolStripMenuItem.Name = "topicsToolStripMenuItem";
-            this.topicsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.topicsToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.topicsToolStripMenuItem.Text = "&Topics";
             // 
             // toolStripHelp
             // 
             this.toolStripHelp.Name = "toolStripHelp";
-            this.toolStripHelp.Size = new System.Drawing.Size(152, 22);
+            this.toolStripHelp.Size = new System.Drawing.Size(133, 22);
             this.toolStripHelp.Text = "Homepage";
             this.toolStripHelp.Click += new System.EventHandler(this.toolStripHelp_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -351,6 +351,7 @@ namespace LC2SQLiteGUI
             this.tbQuery.Name = "tbQuery";
             this.tbQuery.Size = new System.Drawing.Size(153, 21);
             this.tbQuery.TabIndex = 4;
+            this.tbQuery.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbQuery_KeyDown);
             // 
             // cbExec
             // 
@@ -752,6 +753,7 @@ namespace LC2SQLiteGUI
             this.Name = "GUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LC2SQLite GUI";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.GUI_Load);
             this.mnuStripmain.ResumeLayout(false);
             this.mnuStripmain.PerformLayout();
