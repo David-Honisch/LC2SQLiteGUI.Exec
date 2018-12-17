@@ -92,21 +92,21 @@ LoadLanguageFile "${NSISDIR}\Contrib\Language files\Slovak.nlf"
 ;Version Information
 
   VIProductVersion "1.2.3.4"
-  VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "LC2SQLiteGUI.Exec"
-  VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "LC2SQLiteGUI.Exec Client"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "LC2SQLiteGUI"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "LC2SQLiteGUI Client"
   VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "letztechance.org"
   VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalTrademarks" "no trademark"
   VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "© 2014 by David Honisch"
-  VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "LC2SQLiteGUI.Exec"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "LC2SQLiteGUI"
   VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "1.0.0"
 
 ;--------------------------------
 
 
-Name "LC2SQLiteGUI.Exec"
-Caption "LC2SQLiteGUI.Exec Install (c)by http://www.letztechance.org"
+Name "LC2SQLiteGUI"
+Caption "LC2SQLiteGUI Install (c)by http://www.letztechance.org"
 Icon "${NSISDIR}\Contrib\Graphics\Icons\lc.ico"
-OutFile "LC2SQLiteGUI.Execinstall.exe"
+OutFile "LC2SQLiteGUIinstall.exe"
 
 SetDateSave on
 SetDatablockOptimize on
@@ -116,8 +116,8 @@ BGGradient FFFFFF A66E3C 000000
 InstallColors A66E3C FFFFFF
 XPStyle on
 
-InstallDir "$PROGRAMFILES\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec"
-InstallDirRegKey HKLM "Software\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec" "LC2SQLiteGUI.Exec"
+InstallDir "$PROGRAMFILES\LETZTECHANCE.ORG\LC2SQLiteGUI"
+InstallDirRegKey HKLM "Software\LETZTECHANCE.ORG\LC2SQLiteGUI" "LC2SQLiteGUI"
 
 CheckBitmap "${NSISDIR}\Contrib\Graphics\Checks\classic-cross.bmp"
 
@@ -151,12 +151,12 @@ UninstPage instfiles
 ;!if $1 != "Admin"
 ;MessageBox MB_YESNO "Startmenü Eintrag ohne Administrations Privilegien setzen ?" IDYES NoReadme
 ;      Exec notepad.exe ; view readme or whatever, if you want.
-;	CreateShortCut "$SMPROGRAMS\$R0\All users LC2SQLiteGUI.Exec.lnk" $INSTDIR\LC2SQLiteGUI.Exec.exe
+;	CreateShortCut "$SMPROGRAMS\$R0\All users LC2SQLiteGUI.lnk" $INSTDIR\LC2SQLiteGUI.exe
 ;Abort
 ;!else
 ;MessageBox MB_YESNO "Startmenü Eintrag mit Administrations Privilegien setzen ?" IDYES NoReadme
 ;      Exec notepad.exe ; view readme or whatever, if you want.
-;	CreateShortCut "$SMPROGRAMS\$R0\All users LC2SQLiteGUI.Exec.lnk" $INSTDIR\LC2SQLiteGUI.Exec.exe
+;	CreateShortCut "$SMPROGRAMS\$R0\All users LC2SQLiteGUI.lnk" $INSTDIR\LC2SQLiteGUI.exe
 ;!endif
 ;    NoReadme:
 ;
@@ -189,14 +189,14 @@ Section "" ; empty string makes it hidden, so would starting with -
   ; write reg info
   StrCpy $1 "POOOOOOOOOOOP"
   DetailPrint "I like to be able to see what is going on (debug) $1"
-  WriteRegStr HKLM SOFTWARE\WWW.LETZTECHANCE.ORG\LC2SQLiteGUI.Exec "Install_Dir" "$INSTDIR"
+  WriteRegStr HKLM SOFTWARE\WWW.LETZTECHANCE.ORG\LC2SQLiteGUI "Install_Dir" "$INSTDIR"
 
   ; write uninstall strings
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\LC2SQLiteGUI.Exec" "DisplayName" "LC2SQLiteGUI.Exec (remove only)"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\LC2SQLiteGUI.Exec" "UninstallString" '"$INSTDIR\uninst.exe"'
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\LC2SQLiteGUI" "DisplayName" "LC2SQLiteGUI (remove only)"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\LC2SQLiteGUI" "UninstallString" '"$INSTDIR\uninst.exe"'
 ;---Extrahiere Dateien --------------------->
   SetOutPath $INSTDIR
-  ;File /a "exe\LC2SQLiteGUI.Exec.exe"
+  ;File /a "exe\LC2SQLiteGUI.exe"
   ;File /a "exe\*.*"
   File /a ".\install.zip"
   ;File /a /r "exe\Presents\*.*"	
@@ -281,7 +281,7 @@ Section "" ; empty string makes it hidden, so would starting with -
 
 SectionEnd
 
-Section "LC2SQLiteGUI.Exec"
+Section "LC2SQLiteGUI"
 
 SectionIn 1 2 3
 ;  Start: MessageBox MB_OK "Starte Installation"
@@ -328,11 +328,11 @@ Section "Registry/INI functions"
 
 SectionIn 1 4 3
 
-  WriteRegStr HKLM SOFTWARE\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec "StrTest_INSTDIR" "$INSTDIR"
-  WriteRegDword HKLM SOFTWARE\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec "DwordTest_0xDEADBEEF" 0xdeadbeef
-  WriteRegDword HKLM SOFTWARE\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec "DwordTest_123456" 123456
-  WriteRegDword HKLM SOFTWARE\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec "DwordTest_0123" 0123
-  WriteRegBin HKLM SOFTWARE\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec "BinTest_deadbeef01f00dbeef" "DEADBEEF01F00DBEEF"
+  WriteRegStr HKLM SOFTWARE\LETZTECHANCE.ORG\LC2SQLiteGUI "StrTest_INSTDIR" "$INSTDIR"
+  WriteRegDword HKLM SOFTWARE\LETZTECHANCE.ORG\LC2SQLiteGUI "DwordTest_0xDEADBEEF" 0xdeadbeef
+  WriteRegDword HKLM SOFTWARE\LETZTECHANCE.ORG\LC2SQLiteGUI "DwordTest_123456" 123456
+  WriteRegDword HKLM SOFTWARE\LETZTECHANCE.ORG\LC2SQLiteGUI "DwordTest_0123" 0123
+  WriteRegBin HKLM SOFTWARE\LETZTECHANCE.ORG\LC2SQLiteGUI "BinTest_deadbeef01f00dbeef" "DEADBEEF01F00DBEEF"
 ;  StrCpy $8 "$SYSDIR\LC"
   WriteINIStr "$INSTDIR\lc.ini"  "LC2Applikationen" "Value1" $8
   WriteINIStr "$INSTDIR\lc.ini"  "server" "http://www.letztechance.org" $8
@@ -379,17 +379,18 @@ SectionEnd
 Section "CreateShortCuts"
  CreateDirectory $SMPROGRAMS\$R0
  CreateDirectory $SMPROGRAMS\$R0\LETZTECHANCE.ORG
- CreateDirectory $SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec
- CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\Start.LC2Launcher.lnk" $INSTDIR\LC2SQLiteGUI.Exec.exe
- CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\LC2SQLiteGUI.Exec.lnk" $INSTDIR\LC2SQLiteGUI.Exec.exe
- CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\_LC2Launcher.lnk" $INSTDIR\LC2SQLiteGUI.Exec.exe
+ CreateDirectory $SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI
+ CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\Start.LC2Launcher.lnk" $INSTDIR\LC2SQLiteGUI.exe
+ CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\LC2SQLiteGUI.lnk" $INSTDIR\LC2SQLiteGUI.exe
+ CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\_LC2Launcher.lnk" $INSTDIR\LC2SQLiteGUI.exe
+ CreateShortCut "$DESKTOP\$R0\LC2SQLiteGUI.exe.lnk" $INSTDIR\LC2SQLiteGUI.exe
  CreateShortCut "$INSTDIR\Update.lnk" $INSTDIR\LC2Start.NET.exe
- CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\AutoStart.lnk" $INSTDIR\LC2autostart.exe
- CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\AutoStartConfig.lnk" $INSTDIR\LC2autostartConfig.exe
- CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\AutoStartUninstall.lnk" $INSTDIR\LC2autostartUninstall.exe
- CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\LC2Config.lnk" $INSTDIR\LC2Config.exe
- CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\Uninstall.lnk" $INSTDIR\uninst.exe
- CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\Support.lnk" $INSTDIR\letztechance.org.url
+ CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\AutoStart.lnk" $INSTDIR\LC2autostart.exe
+ CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\AutoStartConfig.lnk" $INSTDIR\LC2autostartConfig.exe
+ CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\AutoStartUninstall.lnk" $INSTDIR\LC2autostartUninstall.exe
+ CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\LC2Config.lnk" $INSTDIR\LC2Config.exe
+ CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\Uninstall.lnk" $INSTDIR\uninst.exe
+ CreateShortCut "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\Support.lnk" $INSTDIR\letztechance.org.url
   SectionIn 1 2 3
 
 ;  Call CSCTest
@@ -457,16 +458,16 @@ SectionGroupEnd
 
 ;Uninstaller
 
-UninstallText "Uninstall LC2SQLiteGUI.Exec ?"
+UninstallText "Uninstall LC2SQLiteGUI ?"
 ;UninstallIcon "${NSISDIR}\Contrib\Graphics\Icons\nsis1-uninstall.ico"
 UninstallIcon "${NSISDIR}\Contrib\Graphics\Icons\lc.ico"
 
 Section "Uninstall"
 
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\LC2SQLiteGUI.Exec"
-  DeleteRegKey HKLM "SOFTWARE\WWW.LETZTECHANCE.ORG\LC2SQLiteGUI.Exec"
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\LC2SQLiteGUI"
+  DeleteRegKey HKLM "SOFTWARE\WWW.LETZTECHANCE.ORG\LC2SQLiteGUI"
 
-;  Delete "$SMPROGRAMS\WWW.LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\reg\*.*"
+;  Delete "$SMPROGRAMS\WWW.LETZTECHANCE.ORG\LC2SQLiteGUI\reg\*.*"
 ;  RMDir "$SMPROGRAMS\reg"
   Delete "$INSTDIR\reg\*.*"
   RMDir "$INSTDIR\reg"
@@ -501,9 +502,9 @@ Section "Uninstall"
   Delete "$INSTDIR\*.*"
   RMDir "$INSTDIR\"
   
-  Delete "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\LC2SQLiteGUI.Exec.lnk"
-  Delete "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\uninst.lnk"
-  Delete "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI.Exec\*.*"
+  Delete "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\LC2SQLiteGUI.lnk"
+  Delete "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\uninst.lnk"
+  Delete "$SMPROGRAMS\$R0\LETZTECHANCE.ORG\LC2SQLiteGUI\*.*"
   ;RMDir "$SMPROGRAMS\$R0\LETZTECHANCE.ORG"
   ;RMDir "$SMPROGRAMS"
   !insertmacro RemoveFilesAndSubDirs "$INSTDIR"
